@@ -29,6 +29,7 @@ module KWayMerge
   class Stream
     def initialize(subcollections, &sort_indexer)
       @subcollections, @sort_indexer = subcollections, sort_indexer
+      @positions = @subcollections.map{ 0 }
 
       # lowest sort key value has highest priority, so b first
       @queue = PQueue.new { |a,b| b.sort_value <=> a.sort_value }
@@ -79,9 +80,11 @@ module KWayMerge
 
     def add_from_index(index)
       subcollection = @subcollections[index]
-      unless subcollection.empty?
-        element = subcollection.shift
+      position = @positions[index]
+      if position < subcollection.size
+        element = subcollection[position]
         @queue << Entry.new(element, index, @sort_indexer[element])
+        @positions[index] = position + 1
       end
     end
   end
