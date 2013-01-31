@@ -1,11 +1,11 @@
 # k-way-merge
 
-Ruby implementation of [K-Way Merge algorithm](...) with support for
+Ruby implementation of a K-Way Merge algorithm with support for
 streaming evaluation.
 
 ## Installation
 
-This is packaged as the `k-way-merge` rubygem, so you can just add the
+This ~~is~~ *will be* packaged as the `k-way-merge` rubygem, so you can just add the
 dependency to your Gemfile or install the gem on your system:
 
 ```bash
