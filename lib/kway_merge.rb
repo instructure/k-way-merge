@@ -28,7 +28,13 @@ module KWayMerge
 
   class Stream
     def initialize(subcollections, &sort_indexer)
+      raise ArgumentError unless
+        subcollections.respond_to?(:map) &&
+        subcollections.respond_to?(:size) &&
+        subcollections.respond_to?(:[])
+
       @subcollections, @sort_indexer = subcollections, sort_indexer
+      @sort_indexer ||= lambda{ |el| el }
       @positions = @subcollections.map{ 0 }
 
       # lowest sort key value has highest priority, so b first
